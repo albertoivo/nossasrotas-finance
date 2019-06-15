@@ -23,20 +23,20 @@ def medias(nome, stock, medias):
 
 def bollinger(nome, stock, media=20):
     generate_json(nome, stock)
-    
+
     df = pd.read_json('json/{}.json'.format(nome))
     column_name = 'Close: {} Day Mean'.format(media)
     df[column_name] = df['Close'].rolling(window=media).mean()
     df['Upper'] = df[column_name] + 2*df['Close'].rolling(window=media).std()
     df['Lower'] = df[column_name] - 2*df['Close'].rolling(window=media).std()
-    
-    return df[['Close',column_name,'Upper','Lower']]
+
+    return df[['Close', column_name, 'Upper', 'Lower']]
 
 
 def retorno_diario(stock):
     adj_close = stock['Adj Close']
     log_returns = np.log(adj_close / adj_close.shift(1))
-    log_returns.plot(figsize=(17,6))
+    log_returns.plot(figsize=(17, 6))
     plt.ylabel('Retorno Diário %')
     plt.xlabel('DATA')
 

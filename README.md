@@ -10,25 +10,22 @@
 ### To run this project
 
 - Clone this repo
-    - `git clone https://github.com/albertoivo/nossasrotas-finance.git`
-- If you don't have **Jupyter** installed yet
-    - `conda install -c anaconda jupyter`
+  - `git clone https://github.com/albertoivo/nossasrotas-finance.git`
 - Create the virtual environment
-    - `conda env create -f environment.yml`
+  - `conda env create -f environment.yml`
 - Activate the environment
-    - `conda activate nossasrotas-finance`
+  - `conda activate nrf`
 - Start Jupyter Notebook
-    - `jupyter notebook`
-
+  - `jupyter notebook`
 
 ### Analysis
 
 - Médias móveis:
-    - 9
-    - 17
-    - 34
-    - 80
-    - 200
+  - 9
+  - 17
+  - 34
+  - 80
+  - 200
 - Índice de Força Relativa (IFR)
 - MACD
 - HiLo Activator
