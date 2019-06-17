@@ -1,18 +1,11 @@
-import os.path
 import pandas as pd
 import numpy as np
 import helper
 import matplotlib.pyplot as plt
 
 
-def generate_json(nome, stock):
-    filename = helper.format_filename(nome)
-    if not os.path.exists(filename):
-        stock.to_json('json/{}.json'.format(filename))
-
-
 def medias(nome, stock, medias):
-    generate_json(nome, stock)
+    helper.generate_json(nome, stock)
 
     df = pd.read_json('json/{}.json'.format(nome))
     for m in medias:
@@ -22,7 +15,7 @@ def medias(nome, stock, medias):
 
 
 def bollinger(nome, stock, media=20):
-    generate_json(nome, stock)
+    helper.generate_json(nome, stock)
 
     df = pd.read_json('json/{}.json'.format(nome))
     column_name = 'Close: {} Day Mean'.format(media)

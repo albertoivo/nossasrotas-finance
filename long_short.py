@@ -1,19 +1,30 @@
+import seaborn as sns
 import pandas as pd
 import numpy as np
 import pandas_datareader.data as web
+import matplotlib.pyplot as plt
 import datetime
+import stocks
+from helper import today
 
 datasource = 'yahoo'
 
-last_year = datetime.datetime.now().year - 1
-start = datetime.datetime.now().replace(year=last_year)
-end = datetime.datetime.now()
 
-bancos = ['BBDC4.SA', 'BBDC3.SA', 'ITUB4.SA', 'ITUB3.SA', 'BBAS3.SA',
-          'SANB3.SA', 'SANB11.SA', 'SANB4.SA', 'ITSA3.SA', 'ITSA4.SA']
+def correlacao(stocks, start, end=today):
+    prices = pd.DataFrame()
+    for b in stocks:
+        prices[b] = web.DataReader(b, datasource, start, end)['Adj Close']
+    log_returns = np.log(prices / prices.shift(1))
+    return log_returns.corr()
 
-prices = pd.DataFrame()
-for b in bancos:
-    prices[b] = web.DataReader(b, datasource, start, end)['Adj Close']
 
-log_returns = np.log(prices/prices.shift(1))
+def heatmap(correlacao):
+    sns.set()
+
+    f, ax = plt.subplots(figsize=(34, 15))
+    cmap = sns.diverging_palette(220, 10, as_cmap=True)
+    mask = np.zeros_like(correlacao, dtype=np.bool)
+    mask[np.triu_indices_from(mask)] = True
+
+    sns.heatmap(correlacao, mask=mask, cmap=cmap, vmax=1, center=0.5,
+                square=True, linewidths=.5, cbar_kws={"shrink": .5})
