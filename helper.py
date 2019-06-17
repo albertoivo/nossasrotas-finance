@@ -28,3 +28,9 @@ def generate_json(nome, stock):
     filename = format_filename(nome)
     if not os.path.exists(filename):
         stock.to_json('json/{}.json'.format(filename))
+
+
+def generate_csv(nome, stock):
+    filename = format_filename(nome)
+    if not os.path.exists(filename):
+        stock.to_csv('csv/{}.csv'.format(filename))
