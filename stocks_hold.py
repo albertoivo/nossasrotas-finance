@@ -9,7 +9,15 @@ last_year = datetime.datetime.now().year - 1
 start = datetime.datetime.now().replace(year=last_year)
 end = datetime.datetime.now()
 
-# tickers = ['ITUB4.SA', 'ABEV3.SA', 'USIM5.SA', 'PMAM3.SA', 'FLRY3.SA', 'TIET11.SA']
+tickers = ['ITUB4.SA', 'ABEV3.SA', 'USIM5.SA', 'PMAM3.SA', 'FLRY3.SA', 'TIET11.SA']
+
+
+def port_adj_close():
+        data = pd.DataFrame()
+        for t in tickers:
+                data[t] = web.DataReader(t, ds_yahoo, start, end)['Adj Close']
+        data.to_csv('csv/portfolio_adj_close.csv')
+
 
 def read_stocks_and_generate_csv():
         itau = web.DataReader('ITUB4.SA', ds_yahoo, start, end)
@@ -29,9 +37,6 @@ def read_stocks_and_generate_csv():
 
         tiete = web.DataReader('TIET11.SA', ds_yahoo, start, end)
         tiete.to_csv('csv/tiete.csv')
-
-        ibov = web.DataReader('^BVSP', ds_yahoo, start, end)
-        ibov.to_csv('csv/ibov.csv')
 
 
 ibov_df = pd.read_csv('csv/ibov.csv', index_col=0)
