@@ -12,8 +12,10 @@ datasource = 'yahoo'
 
 def correlacao(stocks, start, end=today):
     prices = pd.DataFrame()
+
     for b in stocks:
         prices[b] = web.DataReader(b, datasource, start, end)['Adj Close']
+
     log_returns = np.log(prices / prices.shift(1))
     return log_returns.corr()
 
