@@ -103,8 +103,12 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# JSON Dataframe
+# Dataframes
 json/
+csv/
+
+# Teste.py
+teste.py
 
 # IDEs
 .vscode/
