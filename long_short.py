@@ -5,12 +5,12 @@ import pandas_datareader.data as web
 import matplotlib.pyplot as plt
 import datetime
 import stocks
-from helper import today
 
 datasource = 'yahoo'
 
+now = datetime.datetime.now()
 
-def correlacao(stocks, start, end=today):
+def correlacao(stocks, start, end=now):
     prices = pd.DataFrame()
 
     for b in stocks:
